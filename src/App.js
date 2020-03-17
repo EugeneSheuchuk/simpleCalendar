@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import Month from "./components/month/Month";
 
 function App() {
-  const currentDate = new Date();
-  let currentYear = currentDate.getFullYear();
+  let currentYear = new Date().getFullYear();
   return (
     <div>
       {currentYear}
+      <Month currentYear={currentYear}
+             month={0}/>
     </div>
   );
 }
