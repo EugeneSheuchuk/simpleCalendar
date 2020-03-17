@@ -5,18 +5,18 @@ import {connect} from "react-redux";
 import {setCurrentYearAC} from "./redux/dateReducer";
 import style from './App.module.css'
 
-function App({setCurrentYear, currentYear, daysOfWeak, monthsNames}) {
+function App({setCurrentYear, currentYear, daysOfWeek, monthsNames}) {
     useEffect(() => {
         setCurrentYear(new Date().getFullYear());
     }, []);
 
     const list = [];
     for (let i = 0; i < 12; i++) {
-      list.push(<Month currentYear={currentYear}
-                       month = {i}
-                       daysOfWeak={daysOfWeak}
-                       monthsNames={monthsNames}
-                       key={`${currentYear}-${i}`} />)
+        list.push(<Month currentYear={currentYear}
+                         month={i}
+                         daysOfWeek={daysOfWeek}
+                         monthsNames={monthsNames}
+                         key={`${currentYear}-${i}`}/>)
     }
 
     return (
@@ -28,11 +28,11 @@ function App({setCurrentYear, currentYear, daysOfWeak, monthsNames}) {
 }
 
 const mapStateToProps = state => {
-  return {
-    currentYear: state.date.currentYear,
-    monthsNames: state.date.monthsNames,
-    daysOfWeak: state.date.daysOfWeak,
-  };
+    return {
+        currentYear: state.date.currentYear,
+        monthsNames: state.date.monthsNames,
+        daysOfWeek: state.date.daysOfWeek,
+    };
 };
 const mapDispatchToProps = dispatch => {
     return {

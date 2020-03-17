@@ -3,8 +3,8 @@ const SET_CURRENT_YEAR = 'simpleCalendar/dateReduser/SET_CURRENT_YEAR';
 let initialState = {
     currentYear: null,
     monthsNames: ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'],
-    daysOfWeak: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        'July', 'August', 'September', 'October', 'November', 'December'],
+    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 };
 
 export const dateReducer = (state = initialState, action) => {
