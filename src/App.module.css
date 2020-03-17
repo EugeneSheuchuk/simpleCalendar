@@ -1,5 +1,7 @@
 .year {
-    text-align: center;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr) ;
+    grid-template-rows: 1fr;
 }
 .months {
     width: 100%;
@@ -7,4 +9,27 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 10px;
+}
+.prev {
+    text-align: left;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.prev:hover {
+    color: darkgray;
+    font-weight: bold;
+}
+
+.next {
+    text-align: right;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.next:hover {
+    color: darkgray;
+    font-weight: bold;
+}
+.center {
+    text-align: center;
+    cursor: pointer;
 }

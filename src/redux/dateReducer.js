@@ -1,4 +1,5 @@
 const SET_CURRENT_YEAR = 'simpleCalendar/dateReduser/SET_CURRENT_YEAR';
+const CHANGE_CURRENT_YEAR = 'simpleCalendar/dateReduser/CHANGE_CURRENT_YEAR';
 
 let initialState = {
     currentYear: null,
@@ -14,9 +15,15 @@ export const dateReducer = (state = initialState, action) => {
                 ...state,
                 currentYear: action.year,
             };
+        case CHANGE_CURRENT_YEAR:
+            return {
+                ...state,
+                currentYear: state.currentYear + action.change,
+            };
         default:
             return state;
     }
 };
 
 export const setCurrentYearAC = (year) => ({type: SET_CURRENT_YEAR, year});
+export const changeCurrentYearAC = (change) => ({type: CHANGE_CURRENT_YEAR, change});

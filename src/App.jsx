@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import './App.module.css';
 import Month from "./components/month/Month";
 import {connect} from "react-redux";
-import {setCurrentYearAC} from "./redux/dateReducer";
+import {changeCurrentYearAC, setCurrentYearAC} from "./redux/dateReducer";
 import style from './App.module.css'
 
-function App({setCurrentYear, currentYear, daysOfWeek, monthsNames}) {
+function App({setCurrentYear, currentYear, daysOfWeek, monthsNames, changeCurrentYear}) {
     useEffect(() => {
         setCurrentYear(new Date().getFullYear());
     }, []);
@@ -21,7 +21,15 @@ function App({setCurrentYear, currentYear, daysOfWeek, monthsNames}) {
 
     return (
         <div className={style.mainBoard}>
-            <div className={style.year}>{currentYear}</div>
+            <div className={style.year}>
+                <div className={`${style.header} ${style.prev}`}
+                     onClick={() => changeCurrentYear(-1)}>Previous
+                </div>
+                <div className={`${style.header} ${style.center}`}>{currentYear}</div>
+                <div className={`${style.header} ${style.next}`}
+                     onClick={() => changeCurrentYear(1)}>Next
+                </div>
+            </div>
             <div className={style.months}>{list}</div>
         </div>
     );
@@ -39,6 +47,9 @@ const mapDispatchToProps = dispatch => {
         setCurrentYear(year) {
             dispatch(setCurrentYearAC(year))
         },
+        changeCurrentYear(change) {
+            dispatch(changeCurrentYearAC(change))
+        }
     };
 };
 
