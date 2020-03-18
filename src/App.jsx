@@ -1,14 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.module.css';
 import Month from "./components/month/Month";
 import {connect} from "react-redux";
-import {changeCurrentYearAC, setCurrentYearAC} from "./redux/dateReducer";
+import {changeCurrentYearAC} from "./redux/dateReducer";
 import style from './App.module.css'
 
-function App({setCurrentYear, currentYear, daysOfWeek, monthsNames}) {
-    // useEffect(() => {
-    //     setCurrentYear(new Date().getFullYear());
-    // }, []);
+function App({currentYear, daysOfWeek, monthsNames}) {
 
     const list = [];
     for (let i = 0; i < 12; i++) {
@@ -44,9 +41,6 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        // setCurrentYear(year) {
-        //     dispatch(setCurrentYearAC(year))
-        // },
         changeCurrentYear(change) {
             dispatch(changeCurrentYearAC(change))
         }
