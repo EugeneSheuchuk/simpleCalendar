@@ -1,5 +1,5 @@
 export function prepareDataForMonth(currentYear, month) {
-    const daysInMonth = 33 - new Date(currentYear, month, 33).getDate();
+    const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
     const firstDayInMonth = new Date(currentYear, month, 1).getDay();
     const numbers = [];
     let daysBeforeMonth = 0;

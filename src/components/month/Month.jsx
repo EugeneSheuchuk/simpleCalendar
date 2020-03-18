@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Month.module.css';
 import {prepareDataForMonth} from './../../assets/functions';
 
-function Month({currentYear, month, daysOfWeek, monthsNames}) {
+function Month({currentYear, month, daysOfWeek, monthName}) {
     const data = prepareDataForMonth(currentYear, month);
     const weekDays = daysOfWeek.map((item, index) => <div
         className={style.daysOfWeak}
@@ -28,7 +28,7 @@ function Month({currentYear, month, daysOfWeek, monthsNames}) {
 
     return (
         <div className={style.monthContainer}>
-            <div className={style.monthName}>{monthsNames[month]}</div>
+            <div className={style.monthName}>{monthName}</div>
             {weekDays}
             {days}
         </div>
