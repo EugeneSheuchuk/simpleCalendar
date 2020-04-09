@@ -1,6 +1,10 @@
+.mainBoard {
+    padding: 20px;
+}
+
 .year {
     display: grid;
-    grid-template-columns:repeat(3, 1fr) ;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
 }
 .months {
@@ -23,7 +27,7 @@
 .next {
     text-align: right;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .next:hover {
     color: darkgray;
