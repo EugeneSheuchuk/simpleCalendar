@@ -1,3 +1,19 @@
+export function currentDayData() {
+    const time = Date.now();
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const currentMonth = date.getMonth();
+    const currentDate = date.getDate();
+    const nextDay = new Date(`${currentYear}-${currentMonth + 1}-${currentDate + 1}`).getTime();
+    const timeToNextDay = nextDay - time;
+    return {
+        currentYear,
+        currentMonth,
+        currentDate,
+        timeToNextDay,
+    };
+}
+
 export function prepareDataForMonth(currentYear, month) {
     const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
     const firstDayInMonth = new Date(currentYear, month, 1).getDay();

@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import style from './App.module.css';
 import Month from './components/month/Month';
 import { connect } from 'react-redux';
-import { _changeCurrentDay, _changeCurrentYear } from './store/actions';
+import { _changeCurrentDay, _changeViewYear } from './store/actions';
 import { getDate } from './store/selectors';
 
-function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames,
-                 currentMonth, currentDate, timeToNextDay, changeCurrentDay }) {
+function App({ changeViewYear, currentYear, daysOfWeek,
+                 monthsNames, viewYear,currentMonth, currentDate,
+                 timeToNextDay, changeCurrentDay }) {
     useEffect(()=> {
         const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
         return () => {clearTimeout(timerId)};
@@ -16,6 +17,7 @@ function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames,
     for (let i = 0; i < 12; i++) {
         list.push(
             <Month
+                viewYear={viewYear}
                 currentYear={currentYear}
                 currentMonth={currentMonth}
                 currentDate={currentDate}
@@ -32,16 +34,16 @@ function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames,
             <div className={style.year}>
                 <div
                     className={`${style.header} ${style.prev}`}
-                    onClick={() => changeCurrentYear(-1)}
+                    onClick={() => changeViewYear(-1)}
                 >
                     Previous
                 </div>
                 <div className={`${style.header} ${style.center}`}>
-                    {currentYear}
+                    {viewYear}
                 </div>
                 <div
                     className={`${style.header} ${style.next}`}
-                    onClick={() => changeCurrentYear(1)}
+                    onClick={() => changeViewYear(1)}
                 >
                     Next
                 </div>
@@ -56,8 +58,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeCurrentYear(change) {
-            dispatch(_changeCurrentYear(change));
+        changeViewYear(change) {
+            dispatch(_changeViewYear(change));
         },
         changeCurrentDay() {
             dispatch(_changeCurrentDay());
