@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import style from './App.module.css';
-import Month from './components/month/Month';
+import Month from './containers/month/Month';
 import { connect } from 'react-redux';
 import { _changeCurrentDay, _changeViewYear } from './store/actions';
 import { getDate } from './store/selectors';
+import { prepareDataForMonth } from './assets/functions';
 
 function App({
     changeViewYear,
@@ -25,15 +26,14 @@ function App({
 
     const list = [];
     for (let i = 0; i < 12; i++) {
+        const data = prepareDataForMonth(viewYear, i);
         list.push(
             <Month
-                viewYear={viewYear}
-                currentYear={currentYear}
-                currentMonth={currentMonth}
+                isCurrentMonth={currentYear === viewYear && i === currentMonth}
                 currentDate={currentDate}
-                month={i}
                 daysOfWeek={daysOfWeek}
                 monthName={monthsNames[i]}
+                data={data}
                 key={`${currentYear}-${i}`}
             />
         );
