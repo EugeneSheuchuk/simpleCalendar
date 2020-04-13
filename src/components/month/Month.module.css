@@ -27,3 +27,7 @@
 .dateNotInThisMonth {
     color: darkgray;
 }
+
+.toDay {
+    background-color: red;
+}

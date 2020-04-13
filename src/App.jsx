@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './App.module.css';
 import Month from './components/month/Month';
 import { connect } from 'react-redux';
-import { _changeCurrentYear } from './store/actions';
+import { _changeCurrentDay, _changeCurrentYear } from './store/actions';
 import { getDate } from './store/selectors';
 
-function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames }) {
+function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames,
+                 currentMonth, currentDate, timeToNextDay, changeCurrentDay }) {
+    useEffect(()=> {
+        const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
+        return () => {clearTimeout(timerId)};
+    }, []);
+
     const list = [];
     for (let i = 0; i < 12; i++) {
         list.push(
             <Month
                 currentYear={currentYear}
+                currentMonth={currentMonth}
+                currentDate={currentDate}
                 month={i}
                 daysOfWeek={daysOfWeek}
                 monthName={monthsNames[i]}
@@ -51,6 +59,9 @@ const mapDispatchToProps = (dispatch) => {
         changeCurrentYear(change) {
             dispatch(_changeCurrentYear(change));
         },
+        changeCurrentDay() {
+            dispatch(_changeCurrentDay());
+        }
     };
 };
 
