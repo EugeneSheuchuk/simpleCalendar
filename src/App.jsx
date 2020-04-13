@@ -5,13 +5,23 @@ import { connect } from 'react-redux';
 import { _changeCurrentDay, _changeViewYear } from './store/actions';
 import { getDate } from './store/selectors';
 
-function App({ changeViewYear, currentYear, daysOfWeek,
-                 monthsNames, viewYear,currentMonth, currentDate,
-                 timeToNextDay, changeCurrentDay }) {
-    useEffect(()=> {
+function App({
+    changeViewYear,
+    currentYear,
+    daysOfWeek,
+    monthsNames,
+    viewYear,
+    currentMonth,
+    currentDate,
+    timeToNextDay,
+    changeCurrentDay,
+}) {
+    useEffect(() => {
         const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
-        return () => {clearTimeout(timerId)};
-    }, []);
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [changeCurrentDay, timeToNextDay]);
 
     const list = [];
     for (let i = 0; i < 12; i++) {
@@ -63,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeCurrentDay() {
             dispatch(_changeCurrentDay());
-        }
+        },
     };
 };
 
