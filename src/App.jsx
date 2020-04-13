@@ -3,6 +3,7 @@ import style from './App.module.css';
 import Month from './components/month/Month';
 import { connect } from 'react-redux';
 import { _changeCurrentYear } from './store/actions';
+import { getDate } from './store/selectors';
 
 function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames }) {
     const list = [];
@@ -43,11 +44,7 @@ function App({ changeCurrentYear, currentYear, daysOfWeek, monthsNames }) {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        currentYear: state.date.currentYear,
-        monthsNames: state.date.monthsNames,
-        daysOfWeek: state.date.daysOfWeek,
-    };
+    return getDate(state);
 };
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -57,6 +54,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default ConnectedApp;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

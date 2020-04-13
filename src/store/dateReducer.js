@@ -1,8 +1,17 @@
 import * as ACTIONS from './actionTypes';
-const currentYear = new Date().getFullYear();
+const time = Date.now();
+const date = new Date();
+const currentYear = date.getFullYear();
+const currentMonth = date.getMonth();
+const currentDate = date.getDate();
+const nextDay = new Date(`${currentYear}-${currentMonth + 1}-${currentDate + 1}`).getTime();
+const timeToNextDay = nextDay - time;
+debugger
 
 let initialState = {
     currentYear: currentYear,
+    currentDate: currentDate,
+    timeToNextDay: timeToNextDay,
     monthsNames: [
         'January',
         'February',
