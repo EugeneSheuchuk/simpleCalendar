@@ -1,0 +1,17 @@
+.date {
+    text-align: center;
+    vertical-align: center;
+}
+
+.weekend {
+    color: gray;
+    font-weight: bold;
+}
+
+.dateNotInThisMonth {
+    color: darkgray;
+}
+
+.toDay {
+    background-color: red;
+}

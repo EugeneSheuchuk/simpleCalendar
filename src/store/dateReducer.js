@@ -1,17 +1,17 @@
 import * as ACTIONS from './actionTypes';
-const time = Date.now();
-const date = new Date();
-const currentYear = date.getFullYear();
-const currentMonth = date.getMonth();
-const currentDate = date.getDate();
-const nextDay = new Date(`${currentYear}-${currentMonth + 1}-${currentDate + 1}`).getTime();
-const timeToNextDay = nextDay - time;
-debugger
+import {
+    currentDayData,
+    getCurrentDateInString,
+    getNextDateInString,
+} from '../assets/functions';
+
+const stringCurrentDate = getCurrentDateInString();
+const initialData = currentDayData(stringCurrentDate);
 
 let initialState = {
-    currentYear: currentYear,
-    currentDate: currentDate,
-    timeToNextDay: timeToNextDay,
+    ...initialData,
+    stringCurrentDate,
+    viewYear: initialData.currentYear,
     monthsNames: [
         'January',
         'February',
@@ -34,7 +34,16 @@ export const dateReducer = (state = initialState, action) => {
         case ACTIONS.DATEREDUCER_CHANGE_CURRENT_YEAR:
             return {
                 ...state,
-                currentYear: state.currentYear + action.change,
+                viewYear: state.viewYear + action.change,
+            };
+        case ACTIONS.DATEREDUCER_CHANGE_CURRENT_DAY:
+            const stringNextDate = getNextDateInString(state.stringCurrentDate);
+            const nextDateData = currentDayData(stringNextDate);
+            return {
+                ...state,
+                ...nextDateData,
+                stringCurrentDate: stringNextDate,
+                viewYear: nextDateData.currentYear,
             };
         default:
             return state;

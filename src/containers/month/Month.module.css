@@ -11,19 +11,3 @@
     grid-column-end: 8;
     text-align: center;
 }
-.daysOfWeak {
-    text-align: center;
-    vertical-align: center;
-    color: red;
-}
-.date {
-    text-align: center;
-    vertical-align: center;
-}
-.weekend {
-    color: gray;
-    font-weight: bold;
-}
-.dateNotInThisMonth {
-    color: darkgray;
-}
