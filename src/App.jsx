@@ -7,16 +7,16 @@ import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
 
 function App({
-    changeViewYear,
-    currentYear,
-    daysOfWeek,
-    monthsNames,
-    viewYear,
-    currentMonth,
-    currentDate,
-    timeToNextDay,
-    changeCurrentDay,
-}) {
+                 changeViewYear,
+                 currentYear,
+                 daysOfWeek,
+                 monthsNames,
+                 viewYear,
+                 currentMonth,
+                 currentDate,
+                 timeToNextDay,
+                 changeCurrentDay,
+             }) {
     useEffect(() => {
         const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
         return () => {
@@ -41,21 +41,28 @@ function App({
 
     return (
         <div className={style.mainBoard}>
-            <div className={style.year}>
-                <div
-                    className={`${style.header} ${style.prev}`}
-                    onClick={() => changeViewYear(-1)}
-                >
-                    Previous
+            <div className={style.header}>
+                <div className={style.options}>
+                    <div className={`${style.opItem} ${style.language}`}>Language</div>
+                    <div className={`${style.opItem} ${style.theme}`}>Theme</div>
+                    <div className={`${style.opItem} ${style.today}`}>today</div>
                 </div>
-                <div className={`${style.header} ${style.center}`}>
-                    {viewYear}
-                </div>
-                <div
-                    className={`${style.header} ${style.next}`}
-                    onClick={() => changeViewYear(1)}
-                >
-                    Next
+                <div className={style.year}>
+                    <div
+                        className={`${style.yearItem} ${style.prev}`}
+                        onClick={() => changeViewYear(-1)}
+                    >
+                        Previous
+                    </div>
+                    <div className={`${style.yearItem} ${style.currentYear}`}>
+                        Current year - {viewYear}
+                    </div>
+                    <div
+                        className={`${style.yearItem} ${style.next}`}
+                        onClick={() => changeViewYear(1)}
+                    >
+                        Next
+                    </div>
                 </div>
             </div>
             <div className={style.months}>{list}</div>

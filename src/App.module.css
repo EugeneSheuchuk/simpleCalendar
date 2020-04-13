@@ -1,39 +1,75 @@
 .mainBoard {
+    margin: 0 auto;
     padding: 20px;
 }
 
-.year {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
+.header {
+    position: relative;
+    margin-bottom: 20px;
 }
-.months {
+
+.options {
+    display: grid;
+    grid-template-columns: 150px 150px 1fr;
+    grid-template-rows: 1fr;
+    margin-bottom: 30px;
+}
+
+.opItem {
+ padding: 0 10px;
+}
+
+.language {
+
+}
+
+.theme {
+
+}
+.today {
+    text-align: right;
+}
+
+.year {
     width: 100%;
+}
+
+.yearItem {
+    display: inline-block;
+    width: 33%;
+}
+
+.months {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 5px;
+    justify-items: center;
 }
+
 .prev {
-    text-align: left;
+    text-align: right;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 1s ease;
 }
+
 .prev:hover {
     color: darkgray;
     font-weight: bold;
 }
 
 .next {
-    text-align: right;
+    text-align: left;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 1s ease;
 }
+
 .next:hover {
     color: darkgray;
     font-weight: bold;
 }
-.center {
+
+.currentYear {
     text-align: center;
     cursor: pointer;
 }
