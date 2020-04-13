@@ -8,3 +8,8 @@ export const _changeViewYear = (change) => ({
 export const _changeCurrentDay = () => ({
     type: ACTIONS.DATEREDUCER_CHANGE_CURRENT_DAY,
 });
+
+export const _changeCurrentLanguage = (language) => ({
+    type: ACTIONS.CHANGE_CURRENT_LANGUAGE,
+    language,
+});

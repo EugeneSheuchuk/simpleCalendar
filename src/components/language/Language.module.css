@@ -1,0 +1,9 @@
+.language {
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+.language span {
+    position: relative;
+    top: 2px;
+}

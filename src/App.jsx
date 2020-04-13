@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './App.module.css';
 import Month from './containers/month/Month';
 import { connect } from 'react-redux';
-import { _changeCurrentDay, _changeViewYear } from './store/actions';
+import { _changeCurrentDay, _changeCurrentLanguage, _changeViewYear } from './store/actions';
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
+import Languages from './containers/languages/Languages';
 
 function App({
                  changeViewYear,
+                 changeCurrentLanguage,
                  currentYear,
                  daysOfWeek,
                  monthsNames,
@@ -16,13 +18,20 @@ function App({
                  currentDate,
                  timeToNextDay,
                  changeCurrentDay,
+                 currentLanguage,
+                 languages,
              }) {
     useEffect(() => {
+        setLoading(() => true);
+        changeCurrentLanguage(window.navigator.language);
+        setLoading(() => false);
         const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
         return () => {
             clearTimeout(timerId);
         };
-    }, [changeCurrentDay, timeToNextDay]);
+    }, [changeCurrentLanguage, changeCurrentDay, timeToNextDay]);
+
+    const [isLoading, setLoading] = useState(true);
 
     const list = [];
     for (let i = 0; i < 12; i++) {
@@ -39,11 +48,15 @@ function App({
         );
     }
 
-    return (
+    return isLoading ? null :(
         <div className={style.mainBoard}>
             <div className={style.header}>
                 <div className={style.options}>
-                    <div className={`${style.opItem} ${style.language}`}>Language</div>
+                    <div className={`${style.opItem} ${style.language}`}>
+                        <Languages currentLanguage={currentLanguage}
+                                   languages={languages}
+                                   action={changeCurrentLanguage}/>
+                    </div>
                     <div className={`${style.opItem} ${style.theme}`}>Theme</div>
                     <div className={`${style.opItem} ${style.today}`}>today</div>
                 </div>
@@ -81,6 +94,9 @@ const mapDispatchToProps = (dispatch) => {
         changeCurrentDay() {
             dispatch(_changeCurrentDay());
         },
+        changeCurrentLanguage(language) {
+            dispatch(_changeCurrentLanguage(language))
+        }
     };
 };
 
