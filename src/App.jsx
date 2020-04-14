@@ -34,7 +34,7 @@ function App({
 
     const list = [];
     for (let i = 0; i < 12; i++) {
-        const data = prepareDataForMonth(viewYear, i);
+        const data = prepareDataForMonth(currentLanguage, viewYear, i);
         list.push(
             <Month
                 isCurrentMonth={currentYear === viewYear && i === currentMonth}
