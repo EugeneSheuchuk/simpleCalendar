@@ -1,11 +1,11 @@
 import React from 'react';
 import DayOfWeek from '../../components/dayOfWeek/DayOfWeek';
 
-function Week({ daysOfWeek, styleClassName }) {
+function Week({ daysOfWeek, currentTheme }) {
     return daysOfWeek.map((item, index) => (
         <DayOfWeek
             value={item}
-            styleClassName={styleClassName}
+            currentTheme={currentTheme}
             key={`${item} + ${index}`}
         />
     ));

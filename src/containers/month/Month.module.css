@@ -2,12 +2,22 @@
     width: 350px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    margin-bottom: 10px;
 }
 .monthName {
     grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-end: 3;
     grid-column-start: 1;
     grid-column-end: 8;
     text-align: center;
+    font-weight: bold;
+}
+
+.light {
+    color: red;
+}
+
+.dark {
+    color: orange;
 }

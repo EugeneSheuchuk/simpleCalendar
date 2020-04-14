@@ -17,3 +17,7 @@ export const _changeCurrentLanguage = (language) => ({
 export const _getToday = () => ({
     type: ACTIONS.DATEREDUCER_SWITCH_TO_TODAY,
 });
+
+export const _switchTheme = () => ({
+	type: ACTIONS.DATEREDUCER_SWITCH_THEME,
+});

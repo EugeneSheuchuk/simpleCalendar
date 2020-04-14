@@ -7,6 +7,7 @@ import {
     _changeCurrentLanguage,
     _changeViewYear,
     _getToday,
+    _switchTheme,
 } from './store/actions';
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
@@ -14,6 +15,7 @@ import Languages from './containers/languages/Languages';
 import en from './assets/textEn';
 import ru from './assets/textRu';
 import by from './assets/textBy';
+import Theme from './components/theme/Theme';
 
 function App({
     changeViewYear,
@@ -27,6 +29,8 @@ function App({
     currentLanguage,
     languages,
     getToday,
+    currentTheme,
+    switchTheme,
 }) {
     useEffect(() => {
         setLoading(() => true);
@@ -45,6 +49,8 @@ function App({
     else if (currentLanguage === 'ru') textObj = { ...ru };
     else if (currentLanguage === 'by') textObj = { ...by };
 
+    const theme = currentTheme === 'light' ? 'dark' : 'light';
+
     const list = [];
     for (let i = 0; i < 12; i++) {
         const data = prepareDataForMonth(currentLanguage, viewYear, i);
@@ -56,30 +62,39 @@ function App({
                 monthName={textObj.month[i]}
                 data={data}
                 currentLanguage={currentLanguage}
+                currentTheme={currentTheme}
                 key={`${currentYear}-${i}`}
             />
         );
     }
 
     return isLoading ? null : (
-        <div className={style.mainBoard}>
+        <div
+            className={`${style.mainBoard} ${
+                style[`${currentTheme}_mainBoard`]
+            }`}
+        >
             <div className={style.header}>
                 <div className={style.options}>
-                    <div className={`${style.opItem} ${style.language}`}>
+                    <div className={`${style.opItem}`}>
                         <Languages
                             currentLanguage={currentLanguage}
                             languages={languages}
                             action={changeCurrentLanguage}
                         />
                     </div>
-                    <div className={`${style.opItem} ${style.theme}`}>
-                        {textObj.theme.name}
+                    <div className={`${style.opItem}`}>
+                        <Theme
+                            name={textObj.theme.name}
+                            value={textObj.theme.options[theme]}
+                            action={switchTheme}
+                        />
                     </div>
                     <div
                         className={`${style.opItem} ${style.today}`}
                         onClick={() => getToday()}
                     >
-                        {textObj.today}
+                        <span>{textObj.today}</span>
                     </div>
                 </div>
                 <div className={style.year}>
@@ -87,7 +102,7 @@ function App({
                         className={`${style.yearItem} ${style.prev}`}
                         onClick={() => changeViewYear(-1)}
                     >
-                        {textObj.year.previous}
+                        <span>{textObj.year.previous}</span>
                     </div>
                     <div className={`${style.yearItem} ${style.currentYear}`}>
                         {textObj.year.current} - {viewYear}
@@ -96,7 +111,7 @@ function App({
                         className={`${style.yearItem} ${style.next}`}
                         onClick={() => changeViewYear(1)}
                     >
-                        {textObj.year.next}
+                        <span>{textObj.year.next}</span>
                     </div>
                 </div>
             </div>
@@ -121,6 +136,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         getToday() {
             dispatch(_getToday());
+        },
+        switchTheme() {
+            dispatch(_switchTheme());
         },
     };
 };

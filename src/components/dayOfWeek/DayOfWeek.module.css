@@ -1,4 +1,11 @@
-.dayOfWeak {
+.dayOfWeek {
     text-align: center;
-    color: red;
+}
+
+.light {
+    color: lightcoral;
+}
+
+.dark {
+    color: lightsalmon;
 }
