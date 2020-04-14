@@ -10,6 +10,10 @@ export const _changeCurrentDay = () => ({
 });
 
 export const _changeCurrentLanguage = (language) => ({
-    type: ACTIONS.CHANGE_CURRENT_LANGUAGE,
+    type: ACTIONS.DATEREDUCER_CHANGE_CURRENT_LANGUAGE,
     language,
+});
+
+export const _getToday = () => ({
+    type: ACTIONS.DATEREDUCER_SWITCH_TO_TODAY,
 });

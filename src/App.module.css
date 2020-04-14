@@ -16,18 +16,17 @@
 }
 
 .opItem {
- padding: 0 10px;
+    padding: 0 10px;
 }
 
 .language {
-
 }
 
 .theme {
-
 }
 .today {
     text-align: right;
+    cursor: pointer;
 }
 
 .year {
