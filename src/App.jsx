@@ -6,6 +6,7 @@ import { _changeCurrentDay, _changeCurrentLanguage, _changeViewYear } from './st
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
 import Languages from './containers/languages/Languages';
+import {mainPage} from './assets/text';
 
 function App({
                  changeViewYear,
@@ -43,6 +44,7 @@ function App({
                 daysOfWeek={daysOfWeek}
                 monthName={monthsNames[i]}
                 data={data}
+                currentLanguage={currentLanguage}
                 key={`${currentYear}-${i}`}
             />
         );
@@ -57,24 +59,28 @@ function App({
                                    languages={languages}
                                    action={changeCurrentLanguage}/>
                     </div>
-                    <div className={`${style.opItem} ${style.theme}`}>Theme</div>
-                    <div className={`${style.opItem} ${style.today}`}>today</div>
+                    <div className={`${style.opItem} ${style.theme}`}>
+                        {mainPage.theme[currentLanguage].name}
+                    </div>
+                    <div className={`${style.opItem} ${style.today}`}>
+                        {mainPage.today[currentLanguage]}
+                    </div>
                 </div>
                 <div className={style.year}>
                     <div
                         className={`${style.yearItem} ${style.prev}`}
                         onClick={() => changeViewYear(-1)}
                     >
-                        Previous
+                        {mainPage.year[currentLanguage].previous}
                     </div>
                     <div className={`${style.yearItem} ${style.currentYear}`}>
-                        Current year - {viewYear}
+                        {mainPage.year[currentLanguage].current} - {viewYear}
                     </div>
                     <div
                         className={`${style.yearItem} ${style.next}`}
                         onClick={() => changeViewYear(1)}
                     >
-                        Next
+                        {mainPage.year[currentLanguage].next}
                     </div>
                 </div>
             </div>
