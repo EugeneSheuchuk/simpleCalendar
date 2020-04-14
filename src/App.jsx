@@ -11,7 +11,9 @@ import {
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
 import Languages from './containers/languages/Languages';
-import { mainPage } from './assets/text';
+import en from './assets/textEn';
+import ru from './assets/textRu';
+import by from './assets/textBy';
 
 function App({
     changeViewYear,
@@ -38,6 +40,11 @@ function App({
 
     const [isLoading, setLoading] = useState(true);
 
+    let textObj = {};
+    if (currentLanguage === 'en') textObj = { ...en };
+    else if (currentLanguage === 'ru') textObj = { ...ru };
+    else if (currentLanguage === 'by') textObj = { ...by };
+
     const list = [];
     for (let i = 0; i < 12; i++) {
         const data = prepareDataForMonth(currentLanguage, viewYear, i);
@@ -45,8 +52,8 @@ function App({
             <Month
                 isCurrentMonth={currentYear === viewYear && i === currentMonth}
                 currentDate={currentDate}
-                daysOfWeek={mainPage.days[currentLanguage]}
-                monthName={mainPage.month[currentLanguage][i]}
+                daysOfWeek={textObj.days}
+                monthName={textObj.month[i]}
                 data={data}
                 currentLanguage={currentLanguage}
                 key={`${currentYear}-${i}`}
@@ -66,13 +73,13 @@ function App({
                         />
                     </div>
                     <div className={`${style.opItem} ${style.theme}`}>
-                        {mainPage.theme[currentLanguage].name}
+                        {textObj.theme.name}
                     </div>
                     <div
                         className={`${style.opItem} ${style.today}`}
                         onClick={() => getToday()}
                     >
-                        {mainPage.today[currentLanguage]}
+                        {textObj.today}
                     </div>
                 </div>
                 <div className={style.year}>
@@ -80,16 +87,16 @@ function App({
                         className={`${style.yearItem} ${style.prev}`}
                         onClick={() => changeViewYear(-1)}
                     >
-                        {mainPage.year[currentLanguage].previous}
+                        {textObj.year.previous}
                     </div>
                     <div className={`${style.yearItem} ${style.currentYear}`}>
-                        {mainPage.year[currentLanguage].current} - {viewYear}
+                        {textObj.year.current} - {viewYear}
                     </div>
                     <div
                         className={`${style.yearItem} ${style.next}`}
                         onClick={() => changeViewYear(1)}
                     >
-                        {mainPage.year[currentLanguage].next}
+                        {textObj.year.next}
                     </div>
                 </div>
             </div>
