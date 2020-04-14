@@ -67,17 +67,17 @@ function App({
 	}
 
 	return isLoading ? null : (
-		<div className={style.mainBoard}>
+		<div className={`${style.mainBoard} ${style[`${currentTheme}_mainBoard`]}`}>
 			<div className={style.header}>
 				<div className={style.options}>
-					<div className={`${style.opItem} ${style.language}`}>
+					<div className={`${style.opItem}`}>
 						<Languages
 							currentLanguage={currentLanguage}
 							languages={languages}
 							action={changeCurrentLanguage}
 						/>
 					</div>
-					<div className={`${style.opItem} ${style.theme}`}>
+					<div className={`${style.opItem}`}>
 						<Theme name={textObj.theme.name}
 							   value={textObj.theme.options[theme]}
                                action={switchTheme}/>
@@ -86,7 +86,7 @@ function App({
 						className={`${style.opItem} ${style.today}`}
 						onClick={() => getToday()}
 					>
-						{textObj.today}
+						<span>{textObj.today}</span>
 					</div>
 				</div>
 				<div className={style.year}>

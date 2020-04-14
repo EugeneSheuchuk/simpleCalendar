@@ -1,6 +1,18 @@
 .mainBoard {
     margin: 0 auto;
     padding: 20px;
+    width: inherit;
+    height: inherit;
+}
+
+.light_mainBoard {
+    background-color: white;
+    color: black;
+}
+
+.dark_mainBoard {
+    background-color: gray;
+    color: white;
 }
 
 .header {
@@ -19,14 +31,13 @@
     padding: 0 10px;
 }
 
-.language {
-}
-
-.theme {
-}
 .today {
     text-align: right;
+}
+
+.today span:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .year {

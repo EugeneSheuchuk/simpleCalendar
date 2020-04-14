@@ -1,9 +1,8 @@
-.language {
-    height: 20px;
-    line-height: 20px;
-    vertical-align: middle;
+.theme {
+    cursor: default;
 }
-.language span {
-    position: relative;
-    top: 2px;
+
+.theme span:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
