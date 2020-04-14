@@ -6,14 +6,12 @@ import { _changeCurrentDay, _changeCurrentLanguage, _changeViewYear } from './st
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
 import Languages from './containers/languages/Languages';
-import {mainPage} from './assets/text';
+import { mainPage } from './assets/text';
 
 function App({
                  changeViewYear,
                  changeCurrentLanguage,
                  currentYear,
-                 daysOfWeek,
-                 monthsNames,
                  viewYear,
                  currentMonth,
                  currentDate,
@@ -41,8 +39,8 @@ function App({
             <Month
                 isCurrentMonth={currentYear === viewYear && i === currentMonth}
                 currentDate={currentDate}
-                daysOfWeek={daysOfWeek}
-                monthName={monthsNames[i]}
+                daysOfWeek={mainPage.days[currentLanguage]}
+                monthName={mainPage.month[currentLanguage][i]}
                 data={data}
                 currentLanguage={currentLanguage}
                 key={`${currentYear}-${i}`}

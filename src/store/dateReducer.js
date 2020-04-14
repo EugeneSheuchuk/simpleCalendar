@@ -15,21 +15,6 @@ let initialState = {
 	viewYear: initialData.currentYear,
 	currentLanguage: 'en',
 	languages: languages,
-	monthsNames: [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
-	],
-	daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 };
 
 export const dateReducer = (state = initialState, action) => {
