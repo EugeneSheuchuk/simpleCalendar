@@ -3,7 +3,14 @@ import style from './Month.module.css';
 import Week from '../week/Week';
 import DayOfMonth from '../../components/dayOfMonth/DayOfMonth';
 
-function Month({ monthName, daysOfWeek, isCurrentMonth, currentDate, data }) {
+function Month({
+    monthName,
+    daysOfWeek,
+    isCurrentMonth,
+    currentDate,
+    data,
+    currentLanguage,
+}) {
     const days = data.numbers.map((item, index) => {
         const isToday = isCurrentMonth && currentDate === item;
         if (
@@ -18,7 +25,7 @@ function Month({ monthName, daysOfWeek, isCurrentMonth, currentDate, data }) {
                 />
             );
         } else {
-            return data.weekendIndex.includes(index) ? (
+            return data.weekendIndex[currentLanguage].includes(index) ? (
                 <DayOfMonth
                     value={item}
                     styleClassName={'weekend'}

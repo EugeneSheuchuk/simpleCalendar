@@ -4,6 +4,7 @@ import {
     getCurrentDateInString,
     getNextDateInString,
 } from '../assets/functions';
+import { languages } from '../assets/languages';
 
 const stringCurrentDate = getCurrentDateInString();
 const initialData = currentDayData(stringCurrentDate);
@@ -12,21 +13,8 @@ let initialState = {
     ...initialData,
     stringCurrentDate,
     viewYear: initialData.currentYear,
-    monthsNames: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ],
-    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    currentLanguage: 'en',
+    languages: languages,
 };
 
 export const dateReducer = (state = initialState, action) => {
@@ -44,6 +32,20 @@ export const dateReducer = (state = initialState, action) => {
                 ...nextDateData,
                 stringCurrentDate: stringNextDate,
                 viewYear: nextDateData.currentYear,
+            };
+        case ACTIONS.DATEREDUCER_CHANGE_CURRENT_LANGUAGE:
+            let currentLanguage = 'en';
+            if (state.languages.hasOwnProperty(action.language)) {
+                currentLanguage = action.language;
+            }
+            return {
+                ...state,
+                currentLanguage,
+            };
+        case ACTIONS.DATEREDUCER_SWITCH_TO_TODAY:
+            return {
+                ...state,
+                viewYear: state.currentYear,
             };
         default:
             return state;

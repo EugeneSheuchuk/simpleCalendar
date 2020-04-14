@@ -38,9 +38,11 @@ export function currentDayData(stringDate) {
     };
 }
 
-export function prepareDataForMonth(currentYear, month) {
+export function prepareDataForMonth(currentLanguage, currentYear, month) {
     const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
-    const firstDayInMonth = new Date(currentYear, month, 1).getDay();
+    let firstDayInMonth = new Date(currentYear, month, 1).getDay();
+    firstDayInMonth =
+        currentLanguage === 'en' ? firstDayInMonth : firstDayInMonth - 1;
     const numbers = [];
     let daysBeforeMonth = 0;
     let daysAfterMonth = 0;
@@ -63,7 +65,11 @@ export function prepareDataForMonth(currentYear, month) {
             daysAfterMonth += 1;
         }
     }
-    const weekendIndex = [0, 6, 7, 13, 14, 20, 21, 27, 28, 34, 35, 41];
+    const weekendIndex = {
+        en: [0, 6, 7, 13, 14, 20, 21, 27, 28, 34, 35, 41],
+        ru: [5, 6, 12, 13, 19, 20, 26, 27, 33, 34, 40, 41],
+        by: [5, 6, 12, 13, 19, 20, 26, 27, 33, 34, 40, 41],
+    };
     return {
         numbers,
         daysBeforeMonth,
