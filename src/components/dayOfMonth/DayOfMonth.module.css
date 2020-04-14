@@ -3,15 +3,33 @@
     vertical-align: center;
 }
 
-.weekend {
-    color: gray;
+.weekend_light {
+    color: lightslategray;
     font-weight: bold;
 }
 
-.dateNotInThisMonth {
+.weekend_dark {
+    color: burlywood;
+    font-weight: bold;
+}
+
+.dateNotInThisMonth_light {
+    color: darkgray;
+}
+.dateNotInThisMonth_dark {
     color: darkgray;
 }
 
-.toDay {
-    background-color: red;
+.toDay_light {
+    border: 1px solid red;
+    border-radius: 50%;
+    color: orange;
+    font-weight: bold;
+}
+
+.toDay_dark {
+    border: 1px solid lightcoral;
+    border-radius: 50%;
+    color: lightcoral;
+    font-weight: bold;
 }

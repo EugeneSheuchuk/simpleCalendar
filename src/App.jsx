@@ -6,7 +6,8 @@ import {
     _changeCurrentDay,
     _changeCurrentLanguage,
     _changeViewYear,
-    _getToday, _switchTheme,
+    _getToday,
+    _switchTheme,
 } from './store/actions';
 import { getDate } from './store/selectors';
 import { prepareDataForMonth } from './assets/functions';
@@ -17,122 +18,129 @@ import by from './assets/textBy';
 import Theme from './components/theme/Theme';
 
 function App({
-				 changeViewYear,
-				 changeCurrentLanguage,
-				 currentYear,
-				 viewYear,
-				 currentMonth,
-				 currentDate,
-				 timeToNextDay,
-				 changeCurrentDay,
-				 currentLanguage,
-				 languages,
-				 getToday,
-				 currentTheme,
-                 switchTheme
-			 }) {
-	useEffect(() => {
-		setLoading(() => true);
-		changeCurrentLanguage(window.navigator.language);
-		setLoading(() => false);
-		const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
-		return () => {
-			clearTimeout(timerId);
-		};
-	}, [changeCurrentLanguage, changeCurrentDay, timeToNextDay]);
+    changeViewYear,
+    changeCurrentLanguage,
+    currentYear,
+    viewYear,
+    currentMonth,
+    currentDate,
+    timeToNextDay,
+    changeCurrentDay,
+    currentLanguage,
+    languages,
+    getToday,
+    currentTheme,
+    switchTheme,
+}) {
+    useEffect(() => {
+        setLoading(() => true);
+        changeCurrentLanguage(window.navigator.language);
+        setLoading(() => false);
+        const timerId = setTimeout(() => changeCurrentDay(), timeToNextDay);
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [changeCurrentLanguage, changeCurrentDay, timeToNextDay]);
 
-	const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
 
-	let textObj = {};
-	if ( currentLanguage === 'en' ) textObj = { ...en };
-	else if ( currentLanguage === 'ru' ) textObj = { ...ru };
-	else if ( currentLanguage === 'by' ) textObj = { ...by };
+    let textObj = {};
+    if (currentLanguage === 'en') textObj = { ...en };
+    else if (currentLanguage === 'ru') textObj = { ...ru };
+    else if (currentLanguage === 'by') textObj = { ...by };
 
-	const theme = currentTheme === 'light' ? 'dark' : 'light';
+    const theme = currentTheme === 'light' ? 'dark' : 'light';
 
-	const list = [];
-	for ( let i = 0; i < 12; i++ ) {
-		const data = prepareDataForMonth(currentLanguage, viewYear, i);
-		list.push(
-			<Month
-				isCurrentMonth={currentYear === viewYear && i === currentMonth}
-				currentDate={currentDate}
-				daysOfWeek={textObj.days}
-				monthName={textObj.month[i]}
-				data={data}
-				currentLanguage={currentLanguage}
-				key={`${currentYear}-${i}`}
-			/>
-		);
-	}
+    const list = [];
+    for (let i = 0; i < 12; i++) {
+        const data = prepareDataForMonth(currentLanguage, viewYear, i);
+        list.push(
+            <Month
+                isCurrentMonth={currentYear === viewYear && i === currentMonth}
+                currentDate={currentDate}
+                daysOfWeek={textObj.days}
+                monthName={textObj.month[i]}
+                data={data}
+                currentLanguage={currentLanguage}
+                currentTheme={currentTheme}
+                key={`${currentYear}-${i}`}
+            />
+        );
+    }
 
-	return isLoading ? null : (
-		<div className={`${style.mainBoard} ${style[`${currentTheme}_mainBoard`]}`}>
-			<div className={style.header}>
-				<div className={style.options}>
-					<div className={`${style.opItem}`}>
-						<Languages
-							currentLanguage={currentLanguage}
-							languages={languages}
-							action={changeCurrentLanguage}
-						/>
-					</div>
-					<div className={`${style.opItem}`}>
-						<Theme name={textObj.theme.name}
-							   value={textObj.theme.options[theme]}
-                               action={switchTheme}/>
-					</div>
-					<div
-						className={`${style.opItem} ${style.today}`}
-						onClick={() => getToday()}
-					>
-						<span>{textObj.today}</span>
-					</div>
-				</div>
-				<div className={style.year}>
-					<div
-						className={`${style.yearItem} ${style.prev}`}
-						onClick={() => changeViewYear(-1)}
-					>
-						{textObj.year.previous}
-					</div>
-					<div className={`${style.yearItem} ${style.currentYear}`}>
-						{textObj.year.current} - {viewYear}
-					</div>
-					<div
-						className={`${style.yearItem} ${style.next}`}
-						onClick={() => changeViewYear(1)}
-					>
-						{textObj.year.next}
-					</div>
-				</div>
-			</div>
-			<div className={style.months}>{list}</div>
-		</div>
-	);
+    return isLoading ? null : (
+        <div
+            className={`${style.mainBoard} ${
+                style[`${currentTheme}_mainBoard`]
+            }`}
+        >
+            <div className={style.header}>
+                <div className={style.options}>
+                    <div className={`${style.opItem}`}>
+                        <Languages
+                            currentLanguage={currentLanguage}
+                            languages={languages}
+                            action={changeCurrentLanguage}
+                        />
+                    </div>
+                    <div className={`${style.opItem}`}>
+                        <Theme
+                            name={textObj.theme.name}
+                            value={textObj.theme.options[theme]}
+                            action={switchTheme}
+                        />
+                    </div>
+                    <div
+                        className={`${style.opItem} ${style.today}`}
+                        onClick={() => getToday()}
+                    >
+                        <span>{textObj.today}</span>
+                    </div>
+                </div>
+                <div className={style.year}>
+                    <div
+                        className={`${style.yearItem} ${style.prev}`}
+                        onClick={() => changeViewYear(-1)}
+                    >
+                        <span>{textObj.year.previous}</span>
+                    </div>
+                    <div className={`${style.yearItem} ${style.currentYear}`}>
+                        {textObj.year.current} - {viewYear}
+                    </div>
+                    <div
+                        className={`${style.yearItem} ${style.next}`}
+                        onClick={() => changeViewYear(1)}
+                    >
+                        <span>{textObj.year.next}</span>
+                    </div>
+                </div>
+            </div>
+            <div className={style.months}>{list}</div>
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => {
-	return getDate(state);
+    return getDate(state);
 };
 const mapDispatchToProps = (dispatch) => {
-	return {
-		changeViewYear(change) {
-			dispatch(_changeViewYear(change));
-		},
-		changeCurrentDay() {
-			dispatch(_changeCurrentDay());
-		},
-		changeCurrentLanguage(language) {
-			dispatch(_changeCurrentLanguage(language));
-		},
-		getToday() {
-			dispatch(_getToday());
-		},
-        switchTheme() {
-		    dispatch(_switchTheme());
+    return {
+        changeViewYear(change) {
+            dispatch(_changeViewYear(change));
         },
-	};
+        changeCurrentDay() {
+            dispatch(_changeCurrentDay());
+        },
+        changeCurrentLanguage(language) {
+            dispatch(_changeCurrentLanguage(language));
+        },
+        getToday() {
+            dispatch(_getToday());
+        },
+        switchTheme() {
+            dispatch(_switchTheme());
+        },
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

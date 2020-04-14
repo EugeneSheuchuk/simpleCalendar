@@ -17,7 +17,7 @@
 
 .header {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .options {
@@ -38,6 +38,7 @@
 .today span:hover {
     cursor: pointer;
     text-decoration: underline;
+    font-weight: bold;
 }
 
 .year {
@@ -59,27 +60,25 @@
 
 .prev {
     text-align: right;
-    cursor: pointer;
-    transition: 1s ease;
 }
 
-.prev:hover {
-    color: darkgray;
+.prev span:hover {
+    cursor: pointer;
+    text-decoration: underline;
     font-weight: bold;
 }
 
 .next {
     text-align: left;
-    cursor: pointer;
-    transition: 1s ease;
 }
 
-.next:hover {
-    color: darkgray;
+.next span:hover {
+    cursor: pointer;
+    text-decoration: underline;
     font-weight: bold;
 }
 
 .currentYear {
     text-align: center;
-    cursor: pointer;
+    cursor: default;
 }
