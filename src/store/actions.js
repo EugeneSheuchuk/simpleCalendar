@@ -19,5 +19,5 @@ export const _getToday = () => ({
 });
 
 export const _switchTheme = () => ({
-	type: ACTIONS.DATEREDUCER_SWITCH_THEME,
+    type: ACTIONS.DATEREDUCER_SWITCH_THEME,
 });
